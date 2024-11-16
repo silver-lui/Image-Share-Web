@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Image Share | Add New Image{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-md-center my-5">
+        <div class="col-2">
+            <h2 class="text-center">Add Image</h2>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success btn-lg" type="submit">SUBMIT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+    
+    

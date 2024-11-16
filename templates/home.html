@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load sorl_thumbnail %}
+
+{% block title %}Image Share | Home Page{% endblock %}
+    
+
+{% block body %}
+    <div class="container text-center">
+        <div class="row">
+            {% for post in posts %}
+                <div class="card my-5 col-6 col-sm-3" style="width: 18rem; margin-right: 15px;">
+                    {% thumbnail post.image "200x200" crop="center" as im %}
+                        <img src="{{ im.url }}" class="card-img-top">
+                    {% endthumbnail %}
+                    <div class="card-body">
+                    <p class="card-text">{{ post.text }}</p>
+                    <a href="{% url 'feed:detail' post.id %}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            {% empty %}
+                <hr>
+                <div class="text-center my-5">
+                    <h2>Welcome Do You Want to Add Yout First Image?</h2>
+                </div>
+                <div class="row justify-content-md-center my-5">
+                    <div class="col-2">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="d-grid gap-2">
+                                <a class="btn btn-success btn-lg" href="post/">Add Image</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    </div> 
+{% endblock %}
